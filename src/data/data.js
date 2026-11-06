@@ -234,10 +234,11 @@ export const skillsData = {
 
 // Navigasi
 export const navLinks = [
-  { name: "LAYANAN", href: "#services", label: "SERVICES" },
-  { name: "PROYEK", href: "#works", label: "WORKS" },
-  { name: "PENGALAMAN", href: "#experience", label: "EXPERIENCE" },
-  { name: "KEAHLIAN", href: "#skills", label: "SKILLS" },
-  { name: "KONTAK", href: "#contact", label: "CONTACT" }
+  { name: "Layanan", href: "#services", label: "SERVICES", desc: "UI/UX, Prototyping & Desain", num: "01" },
+  { name: "Proyek", href: "#works", label: "WORKS", desc: "Studi Kasus & Desain Produk", num: "02" },
+  { name: "Pengalaman", href: "#experience", label: "EXPERIENCE", desc: "Karir & Kontribusi Organisasi", num: "03" },
+  { name: "Pendidikan", href: "#education", label: "EDUCATION", desc: "Gelar S.Kom & Skripsi", num: "04" },
+  { name: "Keahlian", href: "#skills", label: "SKILLS", desc: "Hard Skills & Tools Software", num: "05" },
+  { name: "Kontak", href: "#contact", label: "CONTACT", desc: "Diskusikan Peluang & Pesan", num: "06" }
 ];
 

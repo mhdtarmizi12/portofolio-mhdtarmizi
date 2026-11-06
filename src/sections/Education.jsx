@@ -6,7 +6,7 @@ import SectionHeading from '../components/SectionHeading'
 
 export default function Education() {
   return (
-    <section className="py-14 sm:py-20 px-4 sm:px-8 bg-surface border-t border-line/60">
+    <section id="education" className="py-14 sm:py-20 px-4 sm:px-8 bg-surface border-t border-line/60">
       <div className="max-w-canvas mx-auto">
         
         <SectionHeading
