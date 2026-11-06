@@ -44,3 +44,17 @@
   scrollbar-width: none;
 }
 
+/* Glassmorphism Frosted White Blur (iOS & Android native support) */
+.glass-blur-white {
+  background-color: rgba(255, 255, 255, 0.45) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
+  backdrop-filter: blur(24px) saturate(180%) !important;
+}
+
+.glass-card-white {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  backdrop-filter: blur(12px) !important;
+}
+
+

@@ -140,16 +140,19 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-            animate={{ opacity: 1, backdropFilter: 'blur(32px)' }}
-            exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed inset-0 z-50 bg-white/80 backdrop-blur-3xl backdrop-saturate-150 flex flex-col justify-between overflow-y-auto"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) setMobileMenuOpen(false)
+            }}
+            className="fixed inset-0 z-50 glass-blur-white flex flex-col justify-between overflow-y-auto"
             role="dialog"
             aria-modal="true"
           >
-            {/* Top Bar inside Mobile Menu with Glassmorphism */}
-            <div className="px-6 py-5 border-b border-line/60 flex items-center justify-between bg-white/70 backdrop-blur-md sticky top-0 z-20">
+            {/* Top Bar inside Mobile Menu */}
+            <div className="px-6 py-5 border-b border-ink/10 flex items-center justify-between bg-white/40 backdrop-blur-md sticky top-0 z-20">
               <div className="flex items-center gap-3">
                 <span className="font-script text-3xl font-bold text-ink select-none">
                   {personalData.nickname}
@@ -191,7 +194,7 @@ export default function Navbar() {
                     className={`flex items-center justify-between p-3.5 rounded-2xl transition-all duration-200 active:scale-[0.98] ${
                       isActive
                         ? 'bg-teal text-white shadow-lg shadow-teal/25 border border-teal'
-                        : 'bg-white/90 backdrop-blur-md hover:bg-white text-ink border border-line/70 shadow-sm'
+                        : 'glass-card-white hover:bg-white text-ink border border-white/80 shadow-sm'
                     }`}
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
@@ -237,7 +240,7 @@ export default function Navbar() {
             </div>
 
             {/* Bottom Contact Drawer Footer (Frosted White Glass Container) */}
-            <div className="p-6 bg-white/75 backdrop-blur-xl border-t border-line/60 space-y-4 max-w-md mx-auto w-full rounded-t-3xl shadow-sm">
+            <div className="p-6 bg-white/60 backdrop-blur-xl border-t border-ink/10 space-y-4 max-w-md mx-auto w-full rounded-t-3xl shadow-sm">
               {/* Direct CTA Button */}
               <Button
                 href="#contact"
