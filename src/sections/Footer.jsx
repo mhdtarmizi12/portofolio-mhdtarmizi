@@ -1,5 +1,5 @@
 import React from 'react'
-import { ArrowUp, Heart } from 'lucide-react'
+import { ArrowUp } from 'lucide-react'
 import { personalData, navLinks } from '../data/data'
 
 export default function Footer() {
@@ -35,19 +35,15 @@ export default function Footer() {
           ))}
         </div>
 
-        {/* Kanan: Badge & Back to Top */}
-        <div className="flex items-center gap-4">
-          <span className="text-xs text-ink-soft">
-            Dibuat dengan <span className="font-semibold text-ink">React</span> & <span className="font-semibold text-ink">Vercel</span>
-          </span>
-
+        {/* Kanan: Back to Top */}
+        <div className="flex items-center">
           <button
             onClick={scrollToTop}
             aria-label="Kembali ke atas"
-            className="w-9 h-9 rounded-full bg-white hover:bg-teal hover:text-white text-ink flex items-center justify-center border border-line shadow-sm transition-all duration-200 cursor-pointer"
+            className="w-10 h-10 rounded-full bg-white hover:bg-teal hover:text-white text-ink flex items-center justify-center border border-line shadow-sm hover:shadow-card transition-all duration-200 cursor-pointer group"
             title="Kembali ke atas"
           >
-            <ArrowUp className="w-4 h-4" />
+            <ArrowUp className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
           </button>
         </div>
 
