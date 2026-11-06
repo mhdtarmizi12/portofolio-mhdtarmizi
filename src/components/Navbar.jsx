@@ -136,25 +136,25 @@ export default function Navbar() {
         </div>
       </header>
 
-      {/* Modern Immersive Mobile Menu Modal (Android & iOS Optimized) */}
+      {/* Modern Immersive Mobile Menu Modal (Translucent Frosted Glass / Blur Transparan) */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-50 bg-[#F7F5EA] flex flex-col justify-between overflow-y-auto"
+            initial={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+            animate={{ opacity: 1, backdropFilter: 'blur(24px)' }}
+            exit={{ opacity: 0, backdropFilter: 'blur(0px)' }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed inset-0 z-50 bg-[#F7F5EA]/80 backdrop-blur-2xl backdrop-saturate-150 flex flex-col justify-between overflow-y-auto"
             role="dialog"
             aria-modal="true"
           >
-            {/* Top Bar inside Mobile Menu */}
-            <div className="px-6 py-5 border-b border-line/60 flex items-center justify-between bg-white/50 backdrop-blur-md sticky top-0 z-20">
+            {/* Top Bar inside Mobile Menu with Glassmorphism */}
+            <div className="px-6 py-5 border-b border-ink/10 flex items-center justify-between bg-white/40 backdrop-blur-md sticky top-0 z-20">
               <div className="flex items-center gap-3">
                 <span className="font-script text-3xl font-bold text-ink select-none">
                   {personalData.nickname}
                 </span>
-                <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold uppercase tracking-wider">
+                <span className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-100/90 text-emerald-800 text-[10px] font-bold uppercase tracking-wider border border-emerald-500/20 backdrop-blur-xs">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   Available
                 </span>
@@ -163,14 +163,14 @@ export default function Navbar() {
               {/* Close Button */}
               <button
                 onClick={() => setMobileMenuOpen(false)}
-                className="w-11 h-11 rounded-full bg-white text-ink flex items-center justify-center shadow-card border border-line/80 active:scale-95 hover:bg-slate-100 transition-all cursor-pointer"
+                className="w-11 h-11 rounded-full bg-white/90 text-ink flex items-center justify-center shadow-card border border-white/80 active:scale-95 hover:bg-white transition-all cursor-pointer backdrop-blur-xs"
                 aria-label="Tutup Menu"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            {/* Menu Navigation Items (Editorial Card Style) */}
+            {/* Menu Navigation Items (Frosted Glass Cards) */}
             <div className="px-6 py-6 flex-1 flex flex-col justify-center max-w-md mx-auto w-full space-y-2.5">
               <span className="text-[11px] font-bold text-ink-muted uppercase tracking-wider block px-1 mb-1">
                 Navigasi Halaman
@@ -190,8 +190,8 @@ export default function Navbar() {
                     onClick={(e) => handleNavClick(e, item.href)}
                     className={`flex items-center justify-between p-3.5 rounded-2xl transition-all duration-200 active:scale-[0.98] ${
                       isActive
-                        ? 'bg-teal text-white shadow-md'
-                        : 'bg-white/80 hover:bg-white text-ink border border-line/60 shadow-xs'
+                        ? 'bg-teal text-white shadow-lg shadow-teal/25 border border-teal'
+                        : 'bg-white/70 backdrop-blur-md hover:bg-white/90 text-ink border border-white/70 shadow-xs'
                     }`}
                   >
                     <div className="flex items-center gap-3.5 min-w-0">
@@ -200,7 +200,7 @@ export default function Navbar() {
                         className={`w-7 h-7 rounded-lg text-xs font-bold flex items-center justify-center shrink-0 ${
                           isActive
                             ? 'bg-white/20 text-white'
-                            : 'bg-hero text-ink-soft'
+                            : 'bg-hero/80 text-ink-soft'
                         }`}
                       >
                         {item.num || `0${index + 1}`}
@@ -213,7 +213,7 @@ export default function Navbar() {
                             {item.name}
                           </span>
                           <span className={`text-[10px] font-semibold uppercase tracking-wider px-1.5 py-0.5 rounded ${
-                            isActive ? 'bg-white/20 text-white' : 'text-ink-muted bg-slate-100'
+                            isActive ? 'bg-white/20 text-white' : 'text-ink-muted bg-slate-100/80'
                           }`}>
                             {item.label}
                           </span>
@@ -236,8 +236,8 @@ export default function Navbar() {
               })}
             </div>
 
-            {/* Bottom Contact Drawer Footer */}
-            <div className="p-6 bg-white/70 backdrop-blur-md border-t border-line/60 space-y-4 max-w-md mx-auto w-full">
+            {/* Bottom Contact Drawer Footer (Frosted Glass Container) */}
+            <div className="p-6 bg-white/50 backdrop-blur-xl border-t border-ink/10 space-y-4 max-w-md mx-auto w-full rounded-t-3xl">
               {/* Direct CTA Button */}
               <Button
                 href="#contact"
