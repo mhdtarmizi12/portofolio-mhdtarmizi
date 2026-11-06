@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, MessageSquare, Linkedin, CheckCircle, Copy, ExternalLink } from 'lucide-react'
+import { Mail, MapPin, Send, MessageSquare, Linkedin, CheckCircle, Copy, ExternalLink } from 'lucide-react'
 import { personalData, navLinks } from '../data/data'
 import Button from '../components/Button'
 
@@ -82,31 +82,22 @@ export default function Contact({ onShowToast }) {
               {/* Direct Quick Contact Buttons */}
               <div className="mt-8 pt-8 border-t border-line flex flex-wrap items-center gap-3">
                 <Button
-                  href={personalData.whatsappUrl}
+                  href={`mailto:${personalData.email}`}
                   variant="solid"
-                  icon={Phone}
+                  icon={Mail}
                   iconPosition="left"
                   className="!bg-teal hover:!bg-teal-hover"
                 >
-                  Chat WhatsApp
-                </Button>
-
-                <Button
-                  href={`mailto:${personalData.email}`}
-                  variant="outline"
-                  icon={Mail}
-                  iconPosition="left"
-                >
-                  Kirim Email
+                  Kirim Email Langsung
                 </Button>
 
                 <Button
                   href={personalData.linkedinUrl}
-                  variant="white"
+                  variant="outline"
                   icon={Linkedin}
                   iconPosition="left"
                 >
-                  LinkedIn
+                  Terhubung di LinkedIn
                 </Button>
               </div>
             </div>
@@ -149,30 +140,6 @@ export default function Contact({ onShowToast }) {
                           onClick={() => copyToClipboard(personalData.email, 'Email')}
                           className="text-ink-soft hover:text-ink p-1 rounded hover:bg-slate-100"
                           title="Salin Email"
-                        >
-                          <Copy className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* WhatsApp */}
-                  <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 rounded-full bg-teal-light flex items-center justify-center text-teal shrink-0 border border-teal/20">
-                      <Phone className="w-4 h-4" />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <span className="text-[11px] font-semibold text-ink-soft uppercase tracking-wider block">
-                        WhatsApp / Seluler
-                      </span>
-                      <div className="flex items-center justify-between gap-2">
-                        <a href={personalData.whatsappUrl} target="_blank" rel="noopener noreferrer" className="font-bold text-ink hover:text-teal truncate">
-                          {personalData.phoneDisplay}
-                        </a>
-                        <button
-                          onClick={() => copyToClipboard(personalData.phone, 'Nomor WhatsApp')}
-                          className="text-ink-soft hover:text-ink p-1 rounded hover:bg-slate-100"
-                          title="Salin Nomor"
                         >
                           <Copy className="w-3.5 h-3.5" />
                         </button>
@@ -279,9 +246,9 @@ export default function Contact({ onShowToast }) {
                 </Button>
 
                 <span className="text-xs text-ink-soft text-center sm:text-right">
-                  Atau klik untuk chat langsung di{' '}
-                  <a href={personalData.whatsappUrl} target="_blank" rel="noopener noreferrer" className="text-teal font-bold hover:underline">
-                    WhatsApp (+62 822-8701-2572)
+                  Atau hubungi langsung melalui surel resmi di{' '}
+                  <a href={`mailto:${personalData.email}`} className="text-orange font-bold hover:underline">
+                    {personalData.email}
                   </a>
                 </span>
               </div>

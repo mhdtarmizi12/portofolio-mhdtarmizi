@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Phone, Menu, X } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { personalData, navLinks } from '../data/data'
 import NavPill from './NavPill'
 import Button from './Button'
@@ -76,38 +76,26 @@ export default function Navbar() {
           })}
         </nav>
 
-        {/* Kanan: Nomor WhatsApp & Tombol Telepon Bulat */}
-        <div className="hidden sm:flex items-center gap-2">
-          <span className="text-xs font-semibold text-ink-soft hidden xl:inline">
-            {personalData.phoneDisplay}
-          </span>
-          <a
-            href={personalData.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Hubungi via WhatsApp"
-            className="w-10 h-10 rounded-full bg-white text-teal hover:text-white hover:bg-teal flex items-center justify-center shadow-card hover:shadow-card-hover transition-all duration-200 border border-line/60 group"
-            title="Kirim pesan WhatsApp"
+        {/* Kanan: Tombol CTA Hubungi Cepat */}
+        <div className="hidden sm:flex items-center">
+          <Button
+            href="#contact"
+            variant="solid"
+            className="!px-5 !py-2 !text-xs font-semibold uppercase tracking-wider"
+            onClick={(e) => {
+              e.preventDefault()
+              document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
+            }}
           >
-            <Phone className="w-4 h-4 transition-transform group-hover:scale-110" />
-          </a>
+            Hubungi Saya
+          </Button>
         </div>
 
         {/* Hamburger Mobile Toggle */}
-        <div className="flex items-center gap-2 sm:hidden">
-          <a
-            href={personalData.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="WhatsApp"
-            className="w-9 h-9 rounded-full bg-white text-teal flex items-center justify-center shadow-sm border border-line"
-          >
-            <Phone className="w-4 h-4" />
-          </a>
-
+        <div className="flex items-center sm:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="w-9 h-9 rounded-full bg-white text-ink flex items-center justify-center shadow-sm border border-line cursor-pointer"
+            className="w-10 h-10 rounded-full bg-white text-ink flex items-center justify-center shadow-sm border border-line cursor-pointer"
             aria-label="Menu Navigasi"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -139,7 +127,7 @@ export default function Navbar() {
             })}
 
             <div className="pt-3 mt-2 border-t border-line/60 flex items-center justify-between text-xs text-ink-soft px-2">
-              <span>WhatsApp: {personalData.phoneDisplay}</span>
+              <span className="text-orange font-semibold">{personalData.email}</span>
               <span className="text-teal font-semibold">Pekanbaru, Riau</span>
             </div>
           </div>
