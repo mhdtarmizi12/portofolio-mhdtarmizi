@@ -41,19 +41,27 @@ export default function Experience() {
               return (
                 <motion.div
                   key={item.id}
-                  initial={{ opacity: 0, y: 30 }}
+                  initial={{ opacity: 0, y: 35 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{ duration: 0.55, delay: index * 0.12, ease: [0.25, 0.1, 0.25, 1] }}
                   className="relative flex flex-col md:flex-row items-start md:items-center"
                 >
-                  {/* Dot Berwarna di Garis */}
-                  <div
+                  {/* Dot Berwarna di Garis dengan pop animation */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: [0, 1.35, 1] }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.45, delay: index * 0.12 + 0.2 }}
                     className={`absolute left-4 sm:left-6 md:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full ring-8 z-10 ${dotColorMap[item.color] || dotColorMap.teal}`}
                   />
 
                   {/* Sisi Kiri (Desktop): Instansi & Tanggal */}
-                  <div
+                  <motion.div
+                    initial={{ opacity: 0, x: isEven ? -30 : 30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.5, delay: index * 0.12 + 0.1 }}
                     className={`pl-12 sm:pl-16 md:pl-0 md:w-1/2 ${
                       isEven ? 'md:pr-12 md:text-right' : 'md:order-2 md:pl-12 md:text-left'
                     }`}
@@ -81,15 +89,19 @@ export default function Experience() {
                         {item.location}
                       </span>
                     </div>
-                  </div>
+                  </motion.div>
 
                   {/* Sisi Kanan (Desktop): Peran & Deskripsi */}
-                  <div
+                  <motion.div
+                    initial={{ opacity: 0, x: isEven ? 30 : -30 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: false, amount: 0.2 }}
+                    transition={{ duration: 0.5, delay: index * 0.12 + 0.15 }}
                     className={`pl-12 sm:pl-16 md:pl-0 md:w-1/2 mt-3 md:mt-0 ${
                       isEven ? 'md:pl-12 md:text-left' : 'md:order-1 md:pr-12 md:text-right'
                     }`}
                   >
-                    <div className="bg-white p-5 sm:p-6 rounded-card shadow-card hover:shadow-card-hover border border-line/60 transition-all duration-200">
+                    <div className="bg-white p-5 sm:p-6 rounded-card shadow-card hover:shadow-card-hover border border-line/60 transition-all duration-300 hover:-translate-y-1">
                       <div className="flex items-center gap-2 mb-2">
                         <Briefcase className="w-4 h-4 text-teal" />
                         <h4 className="text-lg font-bold text-ink">
@@ -106,7 +118,7 @@ export default function Experience() {
                         ))}
                       </ul>
                     </div>
-                  </div>
+                  </motion.div>
                 </motion.div>
               )
             })}

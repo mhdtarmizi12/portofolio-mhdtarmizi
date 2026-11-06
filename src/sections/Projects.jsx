@@ -53,13 +53,17 @@ export default function Projects() {
             return (
               <motion.div
                 key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: index * 0.15 }}
-                whileHover={{ y: -6 }}
+                initial={{ opacity: 0, y: 40, scale: 0.96 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                viewport={{ once: false, amount: 0.15 }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.15,
+                  ease: [0.25, 0.1, 0.25, 1]
+                }}
+                whileHover={{ y: -8, scale: 1.015 }}
                 onClick={() => handleOpenModal(project)}
-                className={`rounded-[24px] sm:rounded-[28px] p-6 sm:p-8 cursor-pointer transition-all duration-300 shadow-card hover:shadow-card-hover flex flex-col justify-between overflow-hidden relative group border ${
+                className={`rounded-[24px] sm:rounded-[28px] p-6 sm:p-8 cursor-pointer transition-all duration-300 shadow-card hover:shadow-canvas flex flex-col justify-between overflow-hidden relative group border ${
                   isYellow
                     ? 'bg-[#F4BD44] text-ink border-amber-300'
                     : 'bg-teal text-white border-teal-hover'

@@ -26,18 +26,22 @@ export default function Services() {
               return (
                 <motion.div
                   key={service.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-50px" }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
-                  whileHover={{ y: -4 }}
-                  className="bg-white p-5 sm:p-6 rounded-card shadow-card hover:shadow-card-hover border border-line/60 transition-all duration-200 flex items-center gap-4 sm:gap-5 group"
+                  initial={{ opacity: 0, x: -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: false, amount: 0.2 }}
+                  transition={{
+                    duration: 0.5,
+                    delay: index * 0.12,
+                    ease: [0.25, 0.1, 0.25, 1]
+                  }}
+                  whileHover={{ y: -6, scale: 1.015 }}
+                  className="bg-white p-5 sm:p-6 rounded-card shadow-card hover:shadow-card-hover border border-line/60 transition-all duration-300 flex items-center gap-4 sm:gap-5 group cursor-default"
                 >
                   <IconCircle
                     icon={IconComp}
                     color={service.color}
                     size="lg"
-                    className="group-hover:scale-105 transition-transform"
+                    className="group-hover:scale-110 group-hover:rotate-3 transition-transform duration-300"
                   />
                   <div className="flex-1 min-w-0">
                     <h3 className="text-lg sm:text-xl font-bold text-ink tracking-tight group-hover:text-teal transition-colors">
@@ -58,10 +62,10 @@ export default function Services() {
           {/* Kolom Kanan: H2 "Apa yang bisa saya bantu?" + Paragraf Ringkasan + 2 Stat */}
           <div className="lg:col-span-6 flex flex-col justify-center">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5 }}
+              initial={{ opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
             >
               <SectionHeading
                 badge="Keahlian & Layanan"

@@ -172,10 +172,18 @@ export default function Hero({ onCopyToast }) {
 
             {/* Stat IPK */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border border-line/60 shadow-card"
+              initial={{ opacity: 0, x: -25 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                y: [0, 6, 0]
+              }}
+              transition={{
+                opacity: { duration: 0.5, delay: 0.5 },
+                x: { duration: 0.5, delay: 0.5 },
+                y: { repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.2 }
+              }}
+              className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border border-line/60 shadow-card hover:scale-105 transition-transform"
             >
               <div className="text-4xl sm:text-5xl font-extrabold text-ink leading-none">
                 3.58
@@ -193,19 +201,33 @@ export default function Hero({ onCopyToast }) {
           <div className="relative mx-auto flex justify-center items-end z-10 w-full max-w-[420px] sm:max-w-[480px]">
             {/* SVG Brush Stroke Organik Hijau Teal di Belakang Foto */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.85, rotate: -3 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, scale: 0.85, rotate: -4 }}
+              animate={{
+                opacity: 1,
+                scale: [1, 1.04, 1],
+                rotate: [0, 1.5, 0]
+              }}
+              transition={{
+                opacity: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+                scale: { repeat: Infinity, duration: 6.5, ease: "easeInOut" },
+                rotate: { repeat: Infinity, duration: 7.5, ease: "easeInOut" }
+              }}
               className="absolute -top-10 sm:-top-16 inset-x-0 w-full h-[320px] sm:h-[420px] z-0 flex items-center justify-center pointer-events-none"
             >
               <BrushStroke className="w-full h-full transform scale-110 sm:scale-125" color="#1F6B5C" />
             </motion.div>
 
-            {/* Foto Cut-out Tarmizi menempel ke dasar kanvas (no bottom gap) */}
+            {/* Foto Cut-out Tarmizi menempel ke dasar kanvas dengan floating animation halus */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              initial={{ opacity: 0, y: 40 }}
+              animate={{
+                opacity: 1,
+                y: [0, -7, 0]
+              }}
+              transition={{
+                opacity: { duration: 0.7, delay: 0.25 },
+                y: { repeat: Infinity, duration: 4.6, ease: "easeInOut", delay: 0.9 }
+              }}
               className="relative z-10 w-[260px] sm:w-[320px] lg:w-[360px] -mb-1 flex justify-center"
             >
               <img
@@ -225,10 +247,18 @@ export default function Hero({ onCopyToast }) {
           {/* Kolom Kanan Bawah: Badge Sertifikasi / Gelar Akademik */}
           <div className="absolute right-0 bottom-6 sm:bottom-12 z-20 hidden md:flex flex-col items-center">
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.45 }}
-              className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl border border-line/60 shadow-card flex flex-col items-center text-center max-w-[190px]"
+              initial={{ opacity: 0, x: 25 }}
+              animate={{
+                opacity: 1,
+                x: 0,
+                y: [0, -6, 0]
+              }}
+              transition={{
+                opacity: { duration: 0.5, delay: 0.45 },
+                x: { duration: 0.5, delay: 0.45 },
+                y: { repeat: Infinity, duration: 4.4, ease: "easeInOut", delay: 1 }
+              }}
+              className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl border border-line/60 shadow-card flex flex-col items-center text-center max-w-[190px] hover:scale-105 transition-transform"
             >
               {/* Logo / Ikon Badge Bulat Line Art */}
               <div className="w-12 h-12 rounded-full bg-teal-light border-2 border-teal/30 flex items-center justify-center text-teal mb-2 shadow-sm">

@@ -47,7 +47,13 @@ export default function Contact({ onShowToast }) {
       <div className="max-w-canvas mx-auto">
         
         {/* Blok Besar Krem sesuai DESIGN.md 3.7 */}
-        <div className="bg-hero rounded-canvas p-8 sm:p-12 lg:p-16 border border-line shadow-card relative overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.15 }}
+          transition={{ duration: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
+          className="bg-hero rounded-canvas p-8 sm:p-12 lg:p-16 border border-line shadow-card relative overflow-hidden"
+        >
           {/* Subtle Accent Glow */}
           <div className="absolute -bottom-16 -right-16 w-80 h-80 bg-orange-light/50 rounded-full blur-3xl pointer-events-none" />
 
@@ -255,7 +261,7 @@ export default function Contact({ onShowToast }) {
             </form>
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
     </section>

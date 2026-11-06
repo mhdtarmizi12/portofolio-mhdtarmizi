@@ -9,6 +9,7 @@ import Skills from './sections/Skills'
 import Contact from './sections/Contact'
 import Footer from './sections/Footer'
 import Toast from './components/Toast'
+import ScrollProgress from './components/ScrollProgress'
 
 export default function App() {
   const [toast, setToast] = useState({
@@ -31,6 +32,8 @@ export default function App() {
   return (
     // Latar Luar Halaman: Kuning Mustard (--bg-page: #F0B03A) dengan Frame Padding sesuai DESIGN.md
     <div className="min-h-screen bg-page py-3 px-2 sm:py-8 sm:px-6 lg:py-10 lg:px-10 flex flex-col justify-center items-center">
+      {/* Garis Scroll Progress Animatif di Bagian Paling Atas */}
+      <ScrollProgress />
       
       {/* Kanvas Kartu Besar Bersudut Membulat 28px di Tengah */}
       <main className="w-full max-w-[1240px] bg-white rounded-[22px] sm:rounded-canvas shadow-canvas overflow-hidden border border-amber-500/20 flex flex-col">
