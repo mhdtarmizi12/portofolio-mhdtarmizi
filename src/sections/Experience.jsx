@@ -1,10 +1,25 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useRef } from 'react'
+import { motion, useScroll, useSpring } from 'framer-motion'
 import { Briefcase, Calendar, MapPin, CheckCircle2 } from 'lucide-react'
 import { experiencesData } from '../data/data'
 import SectionHeading from '../components/SectionHeading'
 
 export default function Experience() {
+  const containerRef = useRef(null)
+
+  // Tracking scroll pada kontainer timeline
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 70%", "end 75%"]
+  })
+
+  // Efek pegas halus saat garis memanjang mengikuti scroll
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 25,
+    restDelta: 0.001
+  })
+
   const dotColorMap = {
     teal: "bg-teal ring-teal/20",
     orange: "bg-orange ring-orange/20",
@@ -29,10 +44,16 @@ export default function Experience() {
           align="center"
         />
 
-        {/* Timeline Container */}
-        <div className="relative mt-12 sm:mt-16">
-          {/* Garis vertikal tengah di desktop, garis kiri di mobile */}
-          <div className="absolute top-0 bottom-0 left-4 sm:left-6 md:left-1/2 -translate-x-1/2 w-0.5 bg-line/90" />
+        {/* Timeline Container dengan Garis Scroll Animatif */}
+        <div ref={containerRef} className="relative mt-12 sm:mt-16">
+          {/* 1. Garis latar belakang statis tipis */}
+          <div className="absolute top-0 bottom-0 left-4 sm:left-6 md:left-1/2 -translate-x-1/2 w-0.5 bg-line/70" />
+
+          {/* 2. Garis aktif yang tumbuh memanjang ke bawah mengikuti scroll pengguna */}
+          <motion.div
+            style={{ scaleY }}
+            className="absolute top-0 bottom-0 left-4 sm:left-6 md:left-1/2 -translate-x-1/2 w-1 bg-gradient-to-b from-teal via-orange to-yellow origin-top z-0 rounded-full shadow-[0_0_10px_rgba(31,107,92,0.5)]"
+          />
 
           <div className="space-y-12 sm:space-y-16">
             {experiencesData.map((item, index) => {
