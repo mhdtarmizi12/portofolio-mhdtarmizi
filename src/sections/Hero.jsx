@@ -253,7 +253,7 @@ export default function Hero({ onCopyToast }) {
               </div>
               <div className="text-left">
                 <span className="text-[11px] sm:text-xs font-bold text-ink block leading-tight">
-                  UI/UX & Web System
+                  Web Developer & UI/UX
                 </span>
                 <span className="text-[9px] sm:text-[10px] font-semibold text-teal uppercase tracking-wider block mt-0.5">
                   Fresh Graduate S.Kom
