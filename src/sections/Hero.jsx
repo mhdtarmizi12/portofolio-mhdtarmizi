@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowDown, Mail, Award, Sparkles, Copy, Check, ExternalLink, MessageSquare } from 'lucide-react'
+import { ArrowDown, Mail, Award, Sparkles, Copy, Check, ExternalLink, ArrowRight, MapPin, GraduationCap } from 'lucide-react'
 import { personalData } from '../data/data'
-import BrushStroke from '../components/BrushStroke'
 import Button from '../components/Button'
 
 export default function Hero({ onCopyToast }) {
@@ -18,7 +17,6 @@ export default function Hero({ onCopyToast }) {
 
     const timer = setTimeout(() => {
       if (!isDeleting && displayText === currentTitle) {
-        // Pause at full word
         setTimeout(() => setIsDeleting(true), 1800)
       } else if (isDeleting && displayText === '') {
         setIsDeleting(false)
@@ -42,20 +40,21 @@ export default function Hero({ onCopyToast }) {
   }
 
   return (
-    <section className="relative bg-hero pt-4 pb-0 sm:pt-6 overflow-hidden rounded-t-canvas border-b border-line/60">
+    <section className="relative bg-hero pt-6 sm:pt-10 pb-0 overflow-hidden rounded-t-canvas border-b border-line/60">
       <div className="max-w-canvas mx-auto px-4 sm:px-8">
         
-        {/* Top Row: Left H1 & Right Tagline + CTAs */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start pt-4 sm:pt-6">
+        {/* Modern 2-Column Balanced Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-end">
           
-          {/* Kolom Kiri Atas: Badge + H1 + Typing Title */}
-          <div className="lg:col-span-7 flex flex-col justify-start">
+          {/* Kolom Kiri: Informasi, Bio, CTAs & Kartu Highlight */}
+          <div className="lg:col-span-7 flex flex-col justify-center pb-8 sm:pb-14 pt-2">
+            
             {/* Open to Work Pill */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 self-start bg-white px-3.5 py-1.5 rounded-full shadow-sm border border-line/80 mb-4"
+              className="inline-flex items-center gap-2 self-start bg-white px-3.5 py-1.5 rounded-full shadow-xs border border-line/80 mb-5"
             >
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -66,55 +65,54 @@ export default function Hero({ onCopyToast }) {
               </span>
             </motion.div>
 
-            {/* H1 Besar Dua Baris sesuai DESIGN.md */}
+            {/* H1 Besar Dua Baris */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-4xl sm:text-6xl lg:text-[72px] font-bold text-ink leading-[1.08] tracking-tight"
+              className="text-4xl sm:text-5xl lg:text-[64px] font-extrabold text-ink leading-[1.1] tracking-tight"
             >
-              <span className="block text-ink-soft/90 font-semibold text-3xl sm:text-5xl lg:text-[56px]">
+              <span className="block text-ink-soft/90 font-medium text-2xl sm:text-4xl mb-1">
                 {personalData.heroGreeting}
               </span>
-              <span className="block text-ink font-extrabold mt-1">
-                {personalData.heroName}
-              </span>
+              <span>{personalData.name}</span>
             </motion.h1>
 
-            {/* Dynamic Typing Subtitle */}
+            {/* Dynamic Typing Role */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="h-8 mt-3 flex items-center"
             >
-              <span className="text-sm sm:text-lg font-semibold text-teal flex items-center">
+              <span className="text-base sm:text-xl font-bold text-teal flex items-center">
                 <span>{displayText}</span>
-                <span className="w-0.5 h-5 bg-teal ml-1 animate-pulse" />
+                <span className="w-0.5 h-5 bg-teal ml-1.5 animate-pulse" />
               </span>
             </motion.div>
-          </div>
 
-          {/* Kolom Kanan Atas: Tagline Pendek & Tombol CTA */}
-          <div className="lg:col-span-5 flex flex-col justify-between pt-2 lg:pt-6">
+            {/* Tagline / Ringkasan Singkat */}
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.25 }}
-              className="text-sm sm:text-base text-ink-soft leading-relaxed max-w-md"
+              className="text-sm sm:text-base text-ink-soft leading-relaxed max-w-xl mt-4"
             >
-              "{personalData.tagline}"
+              {personalData.tagline}
             </motion.p>
 
+            {/* Tombol CTA & Quick Email Copy */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.35 }}
-              className="flex flex-wrap items-center gap-3 mt-5"
+              className="flex flex-wrap items-center gap-3 mt-6 sm:mt-7"
             >
               <Button
                 href="#works"
                 variant="solid"
+                icon={ArrowRight}
+                iconPosition="right"
                 onClick={(e) => {
                   e.preventDefault()
                   document.getElementById('works')?.scrollIntoView({ behavior: 'smooth' })
@@ -133,36 +131,19 @@ export default function Hero({ onCopyToast }) {
               >
                 Hubungi Saya
               </Button>
-            </motion.div>
-          </div>
-        </div>
 
-        {/* Middle/Bottom Visual Composition: 3 Visual Pillars */}
-        <div className="relative mt-8 sm:mt-10 lg:mt-12 min-h-[360px] sm:min-h-[440px] lg:min-h-[480px] flex flex-col justify-end">
-          
-          {/* Kolom Kiri Bawah: Email & Stat IPK */}
-          <div className="absolute left-0 bottom-6 sm:bottom-12 z-20 hidden md:flex flex-col gap-6 max-w-[220px]">
-            {/* Email link with copy micro-interaction */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="bg-white/80 backdrop-blur-sm p-3 rounded-2xl border border-line/60 shadow-sm"
-            >
-              <span className="text-[10px] uppercase font-bold text-ink-soft tracking-wider block mb-1">
-                Surel Resmi
-              </span>
-              <div className="flex items-center justify-between gap-2">
+              {/* Quick Email Pill with Copy */}
+              <div className="inline-flex items-center gap-2 bg-white px-3.5 py-2.5 rounded-full border border-line shadow-xs">
                 <a
                   href={`mailto:${personalData.email}`}
-                  className="text-xs sm:text-sm font-semibold text-orange hover:underline truncate"
+                  className="text-xs font-semibold text-orange hover:underline truncate max-w-[170px] sm:max-w-none"
                   title="Kirim Email"
                 >
                   {personalData.email}
                 </a>
                 <button
                   onClick={copyEmail}
-                  className="p-1 rounded-lg hover:bg-slate-100 text-ink-soft hover:text-ink transition-colors"
+                  className="p-1 rounded-md hover:bg-slate-100 text-ink-soft hover:text-ink transition-colors cursor-pointer"
                   title="Salin Email"
                 >
                   {copied ? <Check className="w-3.5 h-3.5 text-teal" /> : <Copy className="w-3.5 h-3.5" />}
@@ -170,65 +151,75 @@ export default function Hero({ onCopyToast }) {
               </div>
             </motion.div>
 
-            {/* Stat IPK */}
+            {/* Mini Bento Highlight Cards (IPK 3.58 & Gelar S.Kom) */}
             <motion.div
-              initial={{ opacity: 0, x: -25 }}
-              animate={{
-                opacity: 1,
-                x: 0,
-                y: [0, 6, 0]
-              }}
-              transition={{
-                opacity: { duration: 0.5, delay: 0.5 },
-                x: { duration: 0.5, delay: 0.5 },
-                y: { repeat: Infinity, duration: 5, ease: "easeInOut", delay: 1.2 }
-              }}
-              className="bg-white/90 backdrop-blur-sm p-4 rounded-2xl border border-line/60 shadow-card hover:scale-105 transition-transform"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.45 }}
+              className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-7 mt-7 border-t border-line/70"
             >
-              <div className="text-4xl sm:text-5xl font-extrabold text-ink leading-none">
-                3.58
+              {/* Card 1: IPK */}
+              <div className="bg-white p-3.5 rounded-2xl border border-line/70 shadow-xs">
+                <span className="text-2xl sm:text-3xl font-extrabold text-ink leading-none">
+                  3.58
+                </span>
+                <span className="text-xs font-bold text-ink-soft block mt-1">
+                  IPK Kelulusan
+                </span>
+                <span className="text-[10px] text-teal font-semibold block mt-0.5">
+                  Skala 4.00
+                </span>
               </div>
-              <div className="text-xs font-bold text-ink mt-1.5 leading-tight">
-                IPK / Kelulusan S.Kom
+
+              {/* Card 2: Gelar & Prodi */}
+              <div className="bg-white p-3.5 rounded-2xl border border-line/70 shadow-xs">
+                <div className="flex items-center gap-1.5 text-teal mb-0.5">
+                  <GraduationCap className="w-4 h-4" />
+                  <span className="text-xs font-bold uppercase tracking-wider">S.Kom</span>
+                </div>
+                <span className="text-xs font-bold text-ink block">
+                  Teknik Informatika
+                </span>
+                <span className="text-[10px] text-ink-muted block mt-0.5 truncate">
+                  Univ. Sains & Teknologi
+                </span>
               </div>
-              <div className="text-[11px] text-teal font-semibold mt-0.5">
-                Teknik Informatika UST
+
+              {/* Card 3: Lokasi */}
+              <div className="bg-white p-3.5 rounded-2xl border border-line/70 shadow-xs col-span-2 sm:col-span-1 flex flex-col justify-center">
+                <div className="flex items-center gap-1.5 text-orange mb-0.5">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider">Lokasi</span>
+                </div>
+                <span className="text-xs font-bold text-ink block">
+                  Pekanbaru, Riau
+                </span>
+                <span className="text-[10px] text-ink-muted block mt-0.5">
+                  Indonesia
+                </span>
               </div>
             </motion.div>
+
           </div>
 
-          {/* Kolom Tengah: Brush Stroke Teal + Foto Profil Cut-out */}
-          <div className="relative mx-auto flex justify-center items-end z-10 w-full max-w-[420px] sm:max-w-[480px]">
-            {/* SVG Brush Stroke Organik Hijau Teal di Belakang Foto */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85, rotate: -4 }}
-              animate={{
-                opacity: 1,
-                scale: [1, 1.04, 1],
-                rotate: [0, 1.5, 0]
-              }}
-              transition={{
-                opacity: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
-                scale: { repeat: Infinity, duration: 6.5, ease: "easeInOut" },
-                rotate: { repeat: Infinity, duration: 7.5, ease: "easeInOut" }
-              }}
-              className="absolute -top-10 sm:-top-16 inset-x-0 w-full h-[320px] sm:h-[420px] z-0 flex items-center justify-center pointer-events-none"
-            >
-              <BrushStroke className="w-full h-full transform scale-110 sm:scale-125" color="#1F6B5C" />
-            </motion.div>
+          {/* Kolom Kanan: Foto Profil Berdiri Bersih & Tegap (Tanpa Background Hijau) */}
+          <div className="lg:col-span-5 flex justify-center items-end relative min-h-[380px] sm:min-h-[460px] lg:min-h-[540px]">
+            
+            {/* Ambient Soft Light Glow (Sangat halus, tidak ada bentuk lingkaran hijau kasar) */}
+            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 w-[280px] sm:w-[360px] h-[360px] bg-gradient-to-t from-amber-100/40 via-teal-50/20 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
 
-            {/* Foto Cut-out Tarmizi menempel ke dasar kanvas dengan floating animation halus */}
+            {/* Foto Cut-Out Tarmizi berdiri bersih menempel ke dasar kanvas */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{
                 opacity: 1,
-                y: [0, -7, 0]
+                y: [0, -6, 0]
               }}
               transition={{
                 opacity: { duration: 0.7, delay: 0.25 },
-                y: { repeat: Infinity, duration: 4.6, ease: "easeInOut", delay: 0.9 }
+                y: { repeat: Infinity, duration: 4.8, ease: "easeInOut", delay: 0.9 }
               }}
-              className="relative z-10 w-[260px] sm:w-[320px] lg:w-[360px] -mb-1 flex justify-center"
+              className="relative z-10 w-full max-w-[300px] sm:max-w-[360px] lg:max-w-[400px] -mb-1 flex justify-center"
             >
               <img
                 src={personalData.photoCutout}
@@ -236,68 +227,37 @@ export default function Hero({ onCopyToast }) {
                 className="w-full h-auto object-contain drop-shadow-xl select-none"
                 loading="eager"
                 onError={(e) => {
-                  // Fallback jika profile.png gagal dimuat
                   e.target.onerror = null
                   e.target.src = personalData.photoOriginal
                 }}
               />
             </motion.div>
-          </div>
 
-          {/* Kolom Kanan Bawah: Badge Sertifikasi / Gelar Akademik */}
-          <div className="absolute right-0 bottom-6 sm:bottom-12 z-20 hidden md:flex flex-col items-center">
+            {/* Floating Glass Pill Badge (S.Kom UI/UX Designer) */}
             <motion.div
-              initial={{ opacity: 0, x: 25 }}
-              animate={{
-                opacity: 1,
-                x: 0,
-                y: [0, -6, 0]
-              }}
-              transition={{
-                opacity: { duration: 0.5, delay: 0.45 },
-                x: { duration: 0.5, delay: 0.45 },
-                y: { repeat: Infinity, duration: 4.4, ease: "easeInOut", delay: 1 }
-              }}
-              className="bg-white/95 backdrop-blur-sm p-4 rounded-2xl border border-line/60 shadow-card flex flex-col items-center text-center max-w-[190px] hover:scale-105 transition-transform"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="absolute top-6 right-2 sm:right-4 z-20 bg-white/90 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-line shadow-sm hidden sm:flex items-center gap-2.5"
             >
-              {/* Logo / Ikon Badge Bulat Line Art */}
-              <div className="w-12 h-12 rounded-full bg-teal-light border-2 border-teal/30 flex items-center justify-center text-teal mb-2 shadow-sm">
-                <Award className="w-6 h-6 text-teal" />
+              <div className="w-8 h-8 rounded-xl bg-teal-light text-teal flex items-center justify-center font-bold text-xs">
+                <Award className="w-4 h-4" />
               </div>
-              <span className="text-[11px] font-extrabold text-ink tracking-wider uppercase">
-                S.Kom
-              </span>
-              <span className="text-[10px] font-bold text-ink-soft uppercase tracking-wider">
-                Teknik Informatika
-              </span>
-              <span className="text-[9px] font-semibold text-orange uppercase tracking-wider mt-0.5">
-                UI/UX Designer
-              </span>
+              <div className="text-left">
+                <span className="text-[11px] font-extrabold text-ink block leading-tight">
+                  UI/UX & Web System
+                </span>
+                <span className="text-[9px] font-semibold text-teal uppercase tracking-wider block">
+                  Fresh Graduate S.Kom
+                </span>
+              </div>
             </motion.div>
-          </div>
-        </div>
 
-        {/* Mobile Info Strip (tampil hanya di layar kecil yang menyembunyikan kolom samping) */}
-        <div className="md:hidden py-6 bg-white/60 -mx-4 px-4 border-t border-line/60 flex items-center justify-between text-left">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-teal text-white flex items-center justify-center font-bold text-xs shadow-sm">
-              3.58
-            </div>
-            <div>
-              <span className="text-xs font-bold text-ink block">IPK 3.58 / S.Kom</span>
-              <span className="text-[11px] text-ink-soft">Univ. Sains & Teknologi</span>
-            </div>
           </div>
 
-          <a
-            href={`mailto:${personalData.email}`}
-            className="text-xs font-semibold text-orange underline"
-          >
-            Kirim Surel
-          </a>
         </div>
+
       </div>
     </section>
   )
 }
-
