@@ -233,21 +233,21 @@ export default function Hero({ onCopyToast }) {
               />
             </motion.div>
 
-            {/* Floating Glass Pill Badge (S.Kom UI/UX Designer) */}
+            {/* Floating Glass Pill Badge (Digeser ke bawah samping badan agar tidak menghalangi wajah) */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              className="absolute top-6 right-2 sm:right-4 z-20 bg-white/90 backdrop-blur-md px-3.5 py-2 rounded-2xl border border-line shadow-sm hidden sm:flex items-center gap-2.5"
+              className="absolute bottom-24 right-0 sm:-right-4 lg:-right-6 z-20 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl border border-line shadow-card hidden sm:flex items-center gap-2.5 hover:scale-105 transition-transform"
             >
-              <div className="w-8 h-8 rounded-xl bg-teal-light text-teal flex items-center justify-center font-bold text-xs">
+              <div className="w-8 h-8 rounded-xl bg-teal-light text-teal flex items-center justify-center font-bold text-xs shrink-0">
                 <Award className="w-4 h-4" />
               </div>
               <div className="text-left">
-                <span className="text-[11px] font-extrabold text-ink block leading-tight">
+                <span className="text-xs font-bold text-ink block leading-tight">
                   UI/UX & Web System
                 </span>
-                <span className="text-[9px] font-semibold text-teal uppercase tracking-wider block">
+                <span className="text-[10px] font-semibold text-teal uppercase tracking-wider block mt-0.5">
                   Fresh Graduate S.Kom
                 </span>
               </div>
