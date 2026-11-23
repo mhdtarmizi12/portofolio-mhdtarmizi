@@ -214,6 +214,7 @@ export const projectsData = [
 export const skillsData = {
   hardSkills: [
     { name: "UI/UX Design", level: "Expertise", icon: "Layout" },
+    { name: "Web Developer", level: "Core", icon: "Code" },
     { name: "Wireframing", level: "Core", icon: "Compass" },
     { name: "Prototyping", level: "Core", icon: "Layers" },
     { name: "Usability Testing", level: "Proficient", icon: "CheckCircle" },
