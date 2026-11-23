@@ -155,6 +155,10 @@ export const projectsData = [
     // Placeholder link Figma - dapat diganti oleh user
     figmaUrl: "https://www.figma.com/", // GANTI DI SINI: ganti dengan URL embed atau file Figma Anda
     thumbnailNote: "Mockup Mobile App 18+ Screens",
+    gallery: [
+      { src: "/projects/car-rental/1.jpeg", label: "Tampilan Beranda & Desain Antarmuka" },
+      { src: "/projects/car-rental/2.jpeg", label: "Alur Transaksi & Detail Armada" }
+    ],
     overview: "Perancangan antarmuka aplikasi pemesanan sewa mobil mobile-first yang mengutamakan kemudahan pengguna dalam mencari unit mobil, memilih durasi sewa dengan transparansi biaya, hingga konfirmasi pembayaran cepat.",
     caseStudy: {
       problem: "Banyak pengguna kesulitan saat menyewa kendaraan melalui layanan konvensional karena lambatnya respon chat, ketidakpastian ketersediaan armada mobil secara langsung (real-time), dan alur rincian biaya yang seringkali tersembunyi hingga tahap akhir.",

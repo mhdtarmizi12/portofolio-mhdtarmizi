@@ -125,13 +125,13 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
                 </div>
 
                 {project.id === 'project-sewa-mobil' ? (
-                  <CarRentalMockup />
+                  <CarRentalMockup isModal={true} />
                 ) : (
                   <ClinicWebMockup isModal={true} />
                 )}
 
                 <p className="mt-4 text-xs text-ink-soft italic">
-                  * Pratinjau tangkapan layar langsung (*direct screenshot*) dari sistem web Optimasi Layanan Klinik Hewan berbasis algoritma K-Means.
+                  * Pratinjau tangkapan layar langsung (*direct showcase screenshots*) dari proyek desain {project.title}.
                 </p>
               </div>
 
