@@ -127,11 +127,11 @@ export default function CaseStudyModal({ project, isOpen, onClose }) {
                 {project.id === 'project-sewa-mobil' ? (
                   <CarRentalMockup />
                 ) : (
-                  <ClinicWebMockup />
+                  <ClinicWebMockup isModal={true} />
                 )}
 
                 <p className="mt-4 text-xs text-ink-soft italic">
-                  * Pratinjau representatif interaktif. Anda dapat mengganti visual ini dengan tangkapan layar langsung atau embed iframe Figma.
+                  * Pratinjau tangkapan layar langsung (*direct screenshot*) dari sistem web Optimasi Layanan Klinik Hewan berbasis algoritma K-Means.
                 </p>
               </div>
 

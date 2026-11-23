@@ -183,6 +183,12 @@ export const projectsData = [
     figmaUrl: "https://www.figma.com/", // GANTI DI SINI jika ada link Figma
     demoUrl: "", // GANTI DI SINI jika ada live demo
     thumbnailNote: "Dashboard & Online Booking Web Portal",
+    gallery: [
+      { src: "/projects/clinic/1.jpeg", label: "Beranda & Portal Layanan Pasien" },
+      { src: "/projects/clinic/2.jpeg", label: "Pendaftaran & Rekam Medis Digital" },
+      { src: "/projects/clinic/3.jpeg", label: "Visualisasi Klaster K-Means" },
+      { src: "/projects/clinic/4.jpeg", label: "Dashboard Dokter & Antrean Real-Time" }
+    ],
     overview: "Sistem informasi manajemen dan reservasi klinik hewan berbasis web yang dirancang untuk mengatasi antrean panjang di klinik dan memetakan pola jenis penanganan penyakit hewan menggunakan algoritma clustering K-Means.",
     caseStudy: {
       problem: "Pemilik hewan seringkali harus mengantre berjam-jam tanpa kepastian giliran, sementara pihak klinik mengalami kendala dalam mengarsipkan riwayat medis manual serta menganalisis tren penyakit hewan yang sering berulang.",
