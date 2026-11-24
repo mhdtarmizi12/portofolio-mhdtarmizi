@@ -12,6 +12,7 @@ export default function Contact({ onShowToast }) {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null) // 'success' | 'activation_needed' | 'error'
 
   const handleChange = (e) => {
     setFormData({
@@ -20,21 +21,52 @@ export default function Contact({ onShowToast }) {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitStatus(null)
 
-    // Simulasi pengiriman form & fallback mailto / WhatsApp
-    setTimeout(() => {
-      setIsSubmitting(false)
-      setIsSubmitted(true)
-      if (onShowToast) onShowToast('Pesan Anda telah siap! Mengalihkan ke email/WhatsApp...', 'success')
+    try {
+      const response = await fetch(`https://formsubmit.co/ajax/${personalData.email}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message,
+          _subject: `Pesan Portofolio Baru dari ${formData.name}`,
+          _template: 'table',
+          _captcha: 'false'
+        })
+      })
 
-      // Fallback langsung membuat link mailto dengan pesan yang diketik
+      const result = await response.json()
+
+      if (response.ok && result.success === 'true') {
+        setIsSubmitted(true)
+        setSubmitStatus('success')
+        setFormData({ name: '', email: '', message: '' })
+        if (onShowToast) onShowToast('Pesan berhasil terkirim ke email Tarmizi!', 'success')
+      } else if (result.message && result.message.toLowerCase().includes('activat')) {
+        setIsSubmitted(true)
+        setSubmitStatus('activation_needed')
+        if (onShowToast) onShowToast('Periksa email tarmiziabd12@gmail.com untuk aktivasi form!', 'info')
+      } else {
+        throw new Error(result.message || 'Gagal mengirim pesan')
+      }
+    } catch (err) {
+      console.error('Error sending message:', err)
+      // Fallback langsung membuat link mailto jika API atau offline
       const subject = encodeURIComponent(`Pesan dari Portofolio: ${formData.name}`)
       const body = encodeURIComponent(`Halo Tarmizi,\n\nNama: ${formData.name}\nEmail: ${formData.email}\n\nPesan:\n${formData.message}`)
       window.location.href = `mailto:${personalData.email}?subject=${subject}&body=${body}`
-    }, 800)
+      if (onShowToast) onShowToast('Membuka aplikasi email untuk mengirim pesan...', 'info')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const copyToClipboard = (text, label) => {
@@ -186,79 +218,132 @@ export default function Contact({ onShowToast }) {
               Kirim Pesan Langsung
             </h3>
             <p className="text-xs sm:text-sm text-ink-soft mb-6">
-              Silakan isi formulir di bawah ini atau hubungi langsung via WhatsApp untuk respon cepat.
+              Silakan isi formulir di bawah ini untuk mengirimkan pesan, tawaran proyek, atau peluang kerja sama secara langsung.
             </p>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1.5">
-                    Nama Lengkap *
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder="Contoh: Budi Santoso"
-                    className="w-full px-4 py-3 rounded-[14px] bg-hero/50 border border-line focus:border-teal focus:bg-white focus:ring-2 focus:ring-teal/20 outline-none transition-all text-sm text-ink"
-                  />
+            {isSubmitted ? (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="py-8 px-6 text-center flex flex-col items-center justify-center rounded-2xl bg-hero/50 border border-line"
+              >
+                {submitStatus === 'activation_needed' ? (
+                  <>
+                    <div className="w-14 h-14 rounded-full bg-orange-light text-orange flex items-center justify-center mb-4 shadow-sm border border-orange/20">
+                      <Mail className="w-7 h-7" />
+                    </div>
+                    <h4 className="text-xl font-bold text-ink mb-2">
+                      Aktivasi Formulir Diperlukan (1x Saja)
+                    </h4>
+                    <p className="text-sm text-ink-soft max-w-md mx-auto mb-6 leading-relaxed">
+                      Layanan pengirim email telah mengirimkan 1 link konfirmasi ke <strong className="text-ink">{personalData.email}</strong>. Silakan buka kotak masuk email Anda dan klik tombol <strong>"Activate Form"</strong> agar pesan otomatis masuk langsung ke inbox Anda.
+                    </p>
+                    <Button
+                      onClick={() => {
+                        setIsSubmitted(false)
+                        setSubmitStatus(null)
+                      }}
+                      variant="outline"
+                    >
+                      Kembali ke Formulir
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-14 h-14 rounded-full bg-teal-light text-teal flex items-center justify-center mb-4 shadow-sm border border-teal/20">
+                      <CheckCircle className="w-7 h-7" />
+                    </div>
+                    <h4 className="text-xl font-bold text-ink mb-2">
+                      Pesan Anda Berhasil Terkirim!
+                    </h4>
+                    <p className="text-sm text-ink-soft max-w-md mx-auto mb-6 leading-relaxed">
+                      Terima kasih telah menghubungi saya. Pesan Anda telah diteruskan langsung ke email resmi saya (<strong className="text-ink">{personalData.email}</strong>). Saya akan segera merespons secepat mungkin.
+                    </p>
+                    <Button
+                      onClick={() => {
+                        setIsSubmitted(false)
+                        setSubmitStatus(null)
+                      }}
+                      variant="outline"
+                    >
+                      Kirim Pesan Lain
+                    </Button>
+                  </>
+                )}
+              </motion.div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="name" className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1.5">
+                      Nama Lengkap *
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      required
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Contoh: Budi Santoso"
+                      className="w-full px-4 py-3 rounded-[14px] bg-hero/50 border border-line focus:border-teal focus:bg-white focus:ring-2 focus:ring-teal/20 outline-none transition-all text-sm text-ink"
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1.5">
+                      Alamat Email *
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      required
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="nama@perusahaan.com"
+                      className="w-full px-4 py-3 rounded-[14px] bg-hero/50 border border-line focus:border-teal focus:bg-white focus:ring-2 focus:ring-teal/20 outline-none transition-all text-sm text-ink"
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1.5">
-                    Alamat Email *
+                  <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1.5">
+                    Pesan Anda *
                   </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
+                  <textarea
+                    id="message"
+                    name="message"
                     required
-                    value={formData.email}
+                    rows={4}
+                    value={formData.message}
                     onChange={handleChange}
-                    placeholder="nama@perusahaan.com"
-                    className="w-full px-4 py-3 rounded-[14px] bg-hero/50 border border-line focus:border-teal focus:bg-white focus:ring-2 focus:ring-teal/20 outline-none transition-all text-sm text-ink"
+                    placeholder="Tuliskan tawaran kerja, proyek UI/UX, atau pesan Anda di sini..."
+                    className="w-full px-4 py-3 rounded-[14px] bg-hero/50 border border-line focus:border-teal focus:bg-white focus:ring-2 focus:ring-teal/20 outline-none transition-all text-sm text-ink resize-none"
                   />
                 </div>
-              </div>
 
-              <div>
-                <label htmlFor="message" className="block text-xs font-bold uppercase tracking-wider text-ink-soft mb-1.5">
-                  Pesan Anda *
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Tuliskan tawaran kerja, proyek UI/UX, atau pesan Anda di sini..."
-                  className="w-full px-4 py-3 rounded-[14px] bg-hero/50 border border-line focus:border-teal focus:bg-white focus:ring-2 focus:ring-teal/20 outline-none transition-all text-sm text-ink resize-none"
-                />
-              </div>
+                <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                  <Button
+                    type="submit"
+                    variant="solid"
+                    icon={Send}
+                    iconPosition="right"
+                    disabled={isSubmitting}
+                    className="w-full sm:w-auto min-w-[180px]"
+                  >
+                    {isSubmitting ? 'Mengirim Pesan...' : 'Kirim Pesan'}
+                  </Button>
 
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                <Button
-                  type="submit"
-                  variant="solid"
-                  icon={Send}
-                  iconPosition="right"
-                  className="w-full sm:w-auto min-w-[180px]"
-                >
-                  {isSubmitting ? 'Mengirim...' : 'Kirim Pesan'}
-                </Button>
-
-                <span className="text-xs text-ink-soft text-center sm:text-right">
-                  Atau hubungi langsung melalui surel resmi di{' '}
-                  <a href={`mailto:${personalData.email}`} className="text-orange font-bold hover:underline">
-                    {personalData.email}
-                  </a>
-                </span>
-              </div>
-            </form>
+                  <span className="text-xs text-ink-soft text-center sm:text-right">
+                    Atau hubungi langsung melalui surel resmi di{' '}
+                    <a href={`mailto:${personalData.email}`} className="text-orange font-bold hover:underline">
+                      {personalData.email}
+                    </a>
+                  </span>
+                </div>
+              </form>
+            )}
           </div>
 
         </motion.div>
